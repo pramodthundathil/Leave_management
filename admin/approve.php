@@ -48,8 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
                 $new_balance = $total_eligible - $new_taken;
                 
                 // Check if user has enough leave balance
-                if ($new_balance < 0) {
-                    throw new Exception("Insufficient leave balance for this user.");
+                if ($new_balance <= 0) {
+                    echo "<script>alert('Insufficient leave balance for this user.');</script>";
+
+                    $_SESSION['message'] = "Insufficient leave balance for this user.";
+                    
+                    header("Location: manage_leaves.php");
+                    exit();
                 }
                 
                 // Update user leave balance
@@ -74,7 +79,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
                     
                     // Check if user has enough leave balance
                     if ($new_balance < 0) {
-                        throw new Exception("Insufficient leave balance for this user.");
+                        echo "<script>alert('Insufficient leave balance for this user.');</script>";
+                        $_SESSION['message'] = "Insufficient leave balance for this user.";
+                        header("Location: manage_leaves.php");
+                        exit();
+                        // throw new Exception("Insufficient leave balance for this user.");
                     }
                     
                     // Create new balance record

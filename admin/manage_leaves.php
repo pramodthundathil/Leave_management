@@ -97,14 +97,14 @@ include('header.php');
 
 <div class="container">
     <h2>📅 Manage Leave Requests</h2>
-    <?php if (isset($_SESSION['message'])): ?>
-        <div style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
-            <?php
-            echo $_SESSION['message'];
-            unset($_SESSION['message']);
-            ?>
-        </div>
-    <?php endif; ?>
+
+ 
+    
+    <?php if (isset($_SESSION['message']) || isset($_SESSION['error_message'])): ?>
+        <script>
+            alert('<?php echo isset($_SESSION['error_message']) ? $_SESSION['error_message'] : $_SESSION['message']; ?>');
+        </script>
+        <?php endif; ?>
     <table>
         <tr>
             <th>Employee</th>
